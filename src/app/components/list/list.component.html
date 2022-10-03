@@ -1,0 +1,21 @@
+<div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Avatar</th>
+      <th>Location</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td><img class="img" src="{{ user.avatar }}" /></td>
+      <td>{{ user.location }}</td>
+      <td>
+        <button id="" (click)="deleteBtnClickHandler(user.id, user.name)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
