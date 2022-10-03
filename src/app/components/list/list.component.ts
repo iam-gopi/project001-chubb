@@ -32,7 +32,6 @@ export class ListComponent implements OnInit {
           } else {
             this.getAllUser();
           }
-
           alert(`${name} record deleted successfully`);
         }
       });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Constant } from '../Utilities/constant';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { User } from '../Utilities/User';
@@ -19,6 +19,19 @@ export class ApiConsumerService {
   deleteAUser(id: number): Observable<User> {
     return this.httpClient
       .delete<User>(`${Constant.deleteEndPoint}/${id}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  addNewUser(name: String, location: String) {
+    const user = new User();
+    user.name = name;
+    user.location = location;
+
+    const header = new HttpHeaders();
+    header.set('Content-Type', 'application/json');
+
+    return this.httpClient
+      .post<User>(Constant.getEndpoint.toString(), user, { headers: header })
       .pipe(retry(1), catchError(this.handleError));
   }
 
